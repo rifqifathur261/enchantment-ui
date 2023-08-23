@@ -1,0 +1,20 @@
+<template>
+  <svg
+    width="79"
+    height="79"
+    viewBox="0 0 79 79"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M31.4661 39.4663L-8.18372e-05 70.9325L7.77809 78.7107L39.2443 47.2445L70.7106 78.7108L78.4888 70.9326L47.0225 39.4663L78.4888 8L70.7106 0.221826L39.2443 31.6881L7.77808 0.221924L-9.82881e-05 8.0001L31.4661 39.4663Z"
+      fill="currentcolor"
+    />
+  </svg>
+</template>
+
+<script setup>
+</script>
+
