@@ -12,6 +12,7 @@ export default {
         'text-dark': '#3D290F',
         'white-primary': '#F9F6F1',
         'grey': '#555555',
+        'light-grey': '#938F87',
       }
     },
   },

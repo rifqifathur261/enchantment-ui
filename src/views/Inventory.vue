@@ -1,7 +1,7 @@
 <template>
   <div class="h-screen w-full relative">
     <img
-      class="w-full h-full blur-sm absolute z-0"
+      class="w-full h-full blur-sm absolute z-0 object-cover"
       src="/backdrop.jpeg"
       alt=""
     />

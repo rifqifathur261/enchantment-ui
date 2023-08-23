@@ -2,9 +2,7 @@
   <div class="bg-black bg-opacity-60 h-16 flex justify-between items-end px-12">
     <div class="flex gap-2 items-center mb-2">
       <Anvil class="text-primary w-5 h-5" />
-      <div class="text-primary-light font-medium tracking-wide">
-        Tool Enchantments
-      </div>
+      <div class="text-primary-light">Tool Enchantments</div>
     </div>
 
     <div>
@@ -20,7 +18,7 @@
           Add
         </div>
         <div
-          class="py-2 flex justify-center items-center bg-primary-light text-primary-light border-2 w-32 border-primary-light border-opacity-10 bg-opacity-10 rounded-tr-xl rounded-tl-xl"
+          class="py-2 flex justify-center items-center bg-primary-light text-primary-light w-32 border-2 border-primary-light border-opacity-10 bg-opacity-10 rounded-tr-xl rounded-tl-xl"
         >
           Upgrade
         </div>
