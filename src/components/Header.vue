@@ -1,6 +1,6 @@
 <template>
   <div class="bg-black bg-opacity-60 h-16 flex justify-between items-end px-12">
-    <div class="flex gap-2 items-center mb-2">
+    <div class="flex gap-2 items-center mb-2 w-[12rem]">
       <Anvil class="text-primary w-5 h-5" />
       <div class="text-primary-light">Tool Enchantments</div>
     </div>
@@ -30,7 +30,7 @@
       </div>
     </div>
 
-    <div class="flex mb-2">
+    <div class="flex mb-2 w-[12rem] justify-end">
       <Coin class="w-7 h-7 -mr-4 z-10" />
       <div
         class="bg-primary-light bg-opacity-20 rounded-lg text-primary-light px-5 flex items-center shrink-0"
