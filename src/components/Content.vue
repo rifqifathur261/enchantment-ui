@@ -1,12 +1,12 @@
 <template>
-  <div class="flex-1 pt-6 flex flex-col items-center gap-10 relative">
+  <div class="flex-1 flex flex-col items-center gap-10 relative justify-center">
     <AddMaterialSection
-      class="flex-1"
+      class=""
       :selected="selected"
       @on-empty="selected.materials = []"
     />
 
-    <BackpackSection class="flex-1" @on-select="handleSelected" />
+    <BackpackSection class="items-start" @on-select="handleSelected" />
   </div>
 </template>
 

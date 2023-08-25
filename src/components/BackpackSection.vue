@@ -1,6 +1,6 @@
 <template>
   <div
-    class="3xl:max-w-[40%] w-[80%] rounded-xl flex bg-white-primary bg-opacity-10 flex-col p-3 gap-3"
+    class="3xl:max-w-[40%] w-[50%] rounded-xl flex bg-white-primary bg-opacity-10 flex-col p-3 gap-3"
   >
     <div class="flex items-center">
       <Backpack class="w-5 h-5 text-primary" />
