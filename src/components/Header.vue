@@ -8,21 +8,35 @@
     <div>
       <div class="flex gap-2 items-center">
         <div
+          @click.enter="onPressed"
           class="w-5 h-5 flex justify-center items-center rounded-md bg-white-primary text-grey"
         >
           A
         </div>
         <div
-          class="py-2 flex justify-center items-center bg-white border border-white text-text-dark w-32 rounded-tr-xl rounded-tl-xl"
+          @click="isActive = 'add'"
+          :class="
+            isActive == 'add'
+              ? 'bg-white border border-white text-text-dark '
+              : 'bg-primary-light text-primary-light  border-2 border-primary-light border-opacity-10 bg-opacity-10'
+          "
+          class="w-32 cursor-pointer py-2 flex justify-center items-center rounded-tr-xl rounded-tl-xl"
         >
           Add
         </div>
         <div
-          class="py-2 flex justify-center items-center bg-primary-light text-primary-light w-32 border-2 border-primary-light border-opacity-10 bg-opacity-10 rounded-tr-xl rounded-tl-xl"
+          @click="isActive = 'upgrade'"
+          :class="
+            isActive == 'upgrade'
+              ? 'bg-white border border-white text-text-dark '
+              : 'bg-primary-light text-primary-light  border-2 border-primary-light border-opacity-10 bg-opacity-10'
+          "
+          class="w-32 cursor-pointer py-2 flex justify-center items-center rounded-tr-xl rounded-tl-xl"
         >
           Upgrade
         </div>
         <div
+          @keyup.d="isActive = 'upgrade'"
           class="w-5 h-5 flex justify-center items-center rounded-md bg-white-primary text-grey"
         >
           D
@@ -42,6 +56,29 @@
 </template>
 
 <script setup>
+import { onMounted, ref } from "vue";
 import Anvil from "../assets/icons/Anvil.vue";
 import Coin from "../assets/icons/Coin.vue";
+
+let isActive = ref("add");
+
+const onPressed = (e) => {
+  console.log(e);
+};
+
+onMounted(() => {
+  window.addEventListener("keydown", (e) => {
+    switch (e.key) {
+      case "a":
+        isActive.value = "add";
+        break;
+      case "d":
+        isActive.value = "upgrade";
+        break;
+
+      default:
+        break;
+    }
+  });
+});
 </script>

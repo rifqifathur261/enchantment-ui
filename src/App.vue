@@ -1,7 +1,7 @@
 <template>
-  <Inventory />
+  <Enchantment />
 </template>
 
 <script setup>
-import Inventory from "./views/Inventory.vue";
+import Enchantment from "./views/Enchantment.vue";
 </script>

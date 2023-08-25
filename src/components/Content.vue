@@ -2,7 +2,10 @@
   <div
     class="bg-black bg-opacity-40 flex-1 pt-6 flex flex-col items-center gap-4"
   >
-    <AddMaterialSection :selected="selected" />
+    <AddMaterialSection
+      :selected="selected"
+      @on-empty="selected.materials = []"
+    />
 
     <BackpackSection @on-select="handleSelected" />
 

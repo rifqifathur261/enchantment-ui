@@ -1,10 +1,12 @@
 <template>
   <div
-    :class="`flex flex-row  gap-2 items-center ${
+    :class="`flex flex-row  gap-2 items-center p-[5px] ${
       text
         ? light
-          ? 'p-1 bg-grey-lighten  rounded-xl'
-          : 'p-1 bg-black bg-opacity-25 border-2 border-black border-opacity-20 rounded-lg'
+          ? ' bg-grey-lighten  rounded-xl'
+          : hasBorder
+          ? ' bg-black bg-opacity-25 border-2  rounded-lg border-black border-opacity-20'
+          : ' bg-black bg-opacity-25 rounded-lg'
         : ''
     }`"
   >
@@ -21,6 +23,10 @@
 
 <script setup>
 const props = defineProps({
+  hasBorder: {
+    type: Boolean,
+    default: true,
+  },
   text: {
     type: Boolean,
     default: false,

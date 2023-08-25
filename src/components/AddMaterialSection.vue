@@ -18,21 +18,26 @@
     </div>
 
     <div
-      class="flex flex-row bg-black backdrop-blur-sm bg-opacity-30 relative z-20"
+      class="flex flex-1 flex-row bg-black backdrop-blur-sm bg-opacity-30 relative z-20"
     >
       <div class="flex-1 flex justify-center items-center relative">
         <BubbleInfo class="absolute top-0" />
 
         <div class="flex flex-col px-8 items-center">
-          <ItemBox type="active" :img="selected?.img" />
+          <ItemBox
+            @click="selectedItem = {}"
+            type="active"
+            :img="selectedItem?.img"
+          />
 
           <div class="text-center text-grey-light my-1">X</div>
 
           <div class="flex flex-nowrap gap-2">
             <ItemBox
-              :img="item < 3 ? 'blue-gem.png' : item < 4 ? 'green-gem.png' : ''"
+              :img="materialItems[item - 1]?.img"
               v-for="item in 5"
               :key="item.id"
+              @click="handleMaterialClick(item - 1)"
             />
           </div>
 
@@ -71,7 +76,7 @@
     <div
       class="flex-1 bg-black bg-opacity-30 rounded-tr-xl rounded-br-xl flex flex-col gap-2 py-8 px-8 relative"
     >
-      <div class="text-grey-light text-[13px]">Enchantments</div>
+      <div class="text-text-light text-[13px]">Enchantments</div>
 
       <div
         class="cursor-pointer rounded-xl flex justify-between bg-black bg-opacity-25 px-3 py-3 border-2 border-grey-light border-opacity-50 hover:border-white hover:border-opacity-100"
@@ -106,8 +111,8 @@
       <div
         class="cursor-pointer rounded-xl flex justify-center items-center gap-2 bg-black bg-opacity-25 px-3 py-3 border-2 border-grey-light border-opacity-50 hover:border-white hover:border-opacity-100"
       >
-        <Rect class="w-5 h-5 text-grey-light" />
-        <div class="text-grey-light">Empty</div>
+        <Rect class="w-4 h-4 text-grey-light" />
+        <div class="text-text-light">Empty</div>
       </div>
 
       <div class="flex justify-center">
@@ -134,10 +139,18 @@
             <div class="flex gap-1">
               <div class="text-primary">Hold</div>
 
-              <div class="text-grey-light">Discard</div>
+              <div class="text-text-light">Discard</div>
             </div>
           </template>
         </KeyButton>
+
+        <div class="w-40 h-10 bg-black opacity-50" id="progress-linear">
+          <div
+            class="flex bg-white h-full duration-300 ease-in-out"
+            :class="progressAnimation"
+            :style="`width: ${progress}%`"
+          ></div>
+        </div>
       </div>
     </div>
   </div>
@@ -151,7 +164,9 @@ import Rect from "../assets/icons/Rect.vue";
 import Triangle from "../assets/icons/Triangle.vue";
 import KeyButton from "./KeysButton.vue";
 import BubbleInfo from "./BubbleInfo.vue";
-import { watch } from "vue";
+import { onMounted, ref, watch } from "vue";
+
+const emit = defineEmits(["on-empty"]);
 
 const props = defineProps({
   selected: {
@@ -160,10 +175,64 @@ const props = defineProps({
   },
 });
 
+const selectedItem = ref({});
+const materialItems = ref([]);
+
+const handleMaterialClick = (index) => {
+  materialItems.value.splice(index, 1);
+};
+
 watch(
   () => props.selected,
   (val) => {
-    // console.log("val ", val);
-  }
+    selectedItem.value = val.item;
+    materialItems.value = val.materials;
+  },
+  { deep: true }
 );
+
+const progress = ref(0);
+const progressAnimation = ref("");
+const canClearMaterial = ref(false);
+
+onMounted(() => {
+  window.addEventListener("keydown", (e) => {
+    e.preventDefault();
+    switch (e.key) {
+      case "x":
+        if (progressAnimation.value == "" && materialItems.value.length > 0) {
+          progressAnimation.value = "animate-progress-animation";
+          canClearMaterial.value = true;
+
+          setTimeout(() => {
+            if (canClearMaterial.value) {
+              progressAnimation.value = "";
+              emit("on-empty");
+            }
+          }, 2000);
+          return;
+        }
+
+      default:
+        break;
+    }
+  });
+  window.addEventListener("keyup", (e) => {
+    e.preventDefault();
+    switch (e.key) {
+      case "x":
+        progressAnimation.value = "";
+        canClearMaterial.value = false;
+
+      default:
+        break;
+    }
+  });
+});
 </script>
+
+<style lang="scss">
+.animation-paused {
+  animation-play-state: paused;
+}
+</style>

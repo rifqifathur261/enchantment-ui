@@ -10,6 +10,7 @@ export default {
         primary: '#CFA87E',
         'primary-light': '#FBE5D5',
         'accent': '#F9DDAA',
+        'text-light': '#AC9F94',
         'text-dark': '#3D290F',
         'white-primary': '#F9F6F1',
         'grey': '#555555',
@@ -22,7 +23,26 @@ export default {
         'blue-lighten': '#97C8FA',
 
         'box-item': '#C3C7C4',
-      }
+      },
+      keyframes: {
+        'progress-animation': {
+          '0%': {
+            width: '0%',
+          },
+          // '40%': {
+          //   width: '50%',
+          // },
+          // '80%': {
+          //   width: '80%',
+          // },
+          '100%': {
+            width: '100%',
+          },
+        }
+      },
+      animation: {
+        'progress-animation': 'progress-animation 2s ease-out',
+      },
     },
   },
   plugins: [],

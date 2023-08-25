@@ -1,6 +1,6 @@
 <template>
   <div
-    class="max-w-[50%] rounded-xl flex bg-white-primary bg-opacity-10 flex-col p-3 gap-3"
+    class="xl:max-w-[50%] w-[80%] rounded-xl flex bg-white-primary bg-opacity-10 flex-col p-3 gap-3"
   >
     <div class="flex items-center">
       <Backpack class="w-5 h-5 text-primary" />
@@ -16,7 +16,7 @@
           :img="items[item - 1]?.img"
           :quantity="items[item - 1]?.hasQuantity"
           :type="items[item - 1]?.state"
-          @click="handleSelect(items[item - 1])"
+          @click="handleSelect(item - 1)"
         >
           <template #quantity>
             <div
@@ -60,11 +60,19 @@ import ItemBox from "./ItemBox.vue";
 
 const emit = defineEmits(["on-select"]);
 
-const selectedItem = ref({});
+let enchantItem = ref({ item: {}, materials: [] });
 
-const handleSelect = (item) => {
+const handleSelect = (index) => {
+  const item = items[index];
   if (item) {
-    emit("on-select", item);
+    if (item.itemType == "tool") {
+      enchantItem.value.item = item;
+    } else if (item.itemType === "material") {
+      items[index].quantity = items[index].quantity - 1;
+      enchantItem.value.materials.push(item);
+    }
+
+    emit("on-select", enchantItem.value);
   }
 };
 
@@ -99,6 +107,14 @@ const items = [
     itemType: "food",
     hasQuantity: true,
     quantity: 2,
+    state: "inactive",
+  },
+  {
+    name: "Carrot",
+    img: "carrot.png",
+    itemType: "food",
+    hasQuantity: true,
+    quantity: 34,
     state: "inactive",
   },
   {
