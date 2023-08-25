@@ -16,7 +16,7 @@
       <div class="text-text-light">Giants Freed</div>
     </div>
     <div class="flex gap-1">
-      <KeyButton :text="true" :has-border="false">
+      <KeyButton :text="true" :has-border="false" class="hover:cursor-default">
         <template #icon> <Mouse class="w-4 h-4" /> </template>
         <template #text>
           <div class="text-primary-light">Select</div>

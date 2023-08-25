@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-black bg-opacity-40 flex-1 pt-6 flex flex-col items-center gap-4"
+    class="bg-black bg-opacity-40 flex-1 pt-6 flex flex-col items-center gap-10"
   >
     <AddMaterialSection
       :selected="selected"

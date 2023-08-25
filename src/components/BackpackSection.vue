@@ -1,6 +1,6 @@
 <template>
   <div
-    class="xl:max-w-[50%] w-[80%] rounded-xl flex bg-white-primary bg-opacity-10 flex-col p-3 gap-3"
+    class="2xl:max-w-[60%] w-[80%] rounded-xl flex bg-white-primary bg-opacity-10 flex-col p-3 gap-3"
   >
     <div class="flex items-center">
       <Backpack class="w-5 h-5 text-primary" />
@@ -40,9 +40,9 @@
         </ItemBox>
       </div>
 
-      <div class="flex flex-wrap gap-2">
+      <div class="flex flex-wrap gap-2 mt-4">
         <div
-          class="w-16 h-16 flex justify-center items-center"
+          class="w-16 flex justify-center items-center"
           v-for="item in 11"
           :key="item.id"
         >
@@ -69,7 +69,8 @@ const handleSelect = (index) => {
       enchantItem.value.item = item;
     } else if (item.itemType === "material") {
       items[index].quantity = items[index].quantity - 1;
-      enchantItem.value.materials.push(item);
+      if (enchantItem.value.materials.length < 5)
+        enchantItem.value.materials.push(item);
     }
 
     emit("on-select", enchantItem.value);

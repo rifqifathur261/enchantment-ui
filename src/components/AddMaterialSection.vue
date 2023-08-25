@@ -20,15 +20,23 @@
     <div
       class="flex flex-1 flex-row bg-black backdrop-blur-sm bg-opacity-30 relative z-20"
     >
-      <div class="flex-1 flex justify-center items-center relative">
-        <BubbleInfo class="absolute top-0" />
-
+      <div class="flex-1 flex justify-center items-center relative py-10">
         <div class="flex flex-col px-8 items-center">
-          <ItemBox
-            @click="selectedItem = {}"
-            type="active"
-            :img="selectedItem?.img"
-          />
+          <div class="group">
+            <ItemBox
+              @click="selectedItem = {}"
+              type="active"
+              :img="selectedItem?.img"
+            />
+            <BubbleInfo class="absolute top-0 group-hover:scale-100">
+              <template #text>
+                <div class="flex gap-1">
+                  Select a <span class="text-text-dark"> Tool </span> then
+                  <span class="text-text-dark"> Material </span> to Enchant
+                </div>
+              </template>
+            </BubbleInfo>
+          </div>
 
           <div class="text-center text-grey-light my-1">X</div>
 
@@ -47,17 +55,20 @@
                 class="absolute w-full h-[5px] rounded-md bg-white-primary bg-opacity-30"
               />
               <div
-                class="absolute w-4/5 h-[5px] rounded-md bg-white-primary bg-opacity-60"
+                class="absolute h-[5px] rounded-md bg-white-primary bg-opacity-60 transition-all duration-500"
+                :style="`width: ${materialItems.length * 20}%;`"
               />
             </div>
-            <div class="text-primary-light">80 / 100</div>
+            <div class="text-primary-light">
+              {{ materialItems.length * 20 }} / 100
+            </div>
           </div>
         </div>
 
         <div
           class="flex flex-col items-start absolute -bottom-2 left-1/2 -translate-x-1/2"
         >
-          <KeyButton :text="true" light class="px-3 py-2">
+          <KeyButton :text="true" light class="px-2 py-1">
             <template #icon>
               <div class="px-1">Enter</div>
             </template>
@@ -115,25 +126,35 @@
         <div class="text-text-light">Empty</div>
       </div>
 
-      <div class="flex justify-center">
-        <Triangle class="text-white w-4 h-4" />
-      </div>
+      <div class="flex gap-2 flex-col" v-if="materialItems.length > 0">
+        <div class="flex justify-center">
+          <Triangle class="text-white w-4 h-4" />
+        </div>
 
-      <div
-        class="cursor-pointer rounded-xl px-3 border-2 border-grey-light hover:border-white hover:border-opacity-100 border-opacity-50 bg-gradient-to-tr via-30% from-blue-light via-blue-dark to-blue-light"
-      >
-        <div class="py-3 flex justify-between">
-          <div class="flex items-center gap-2">
-            <TrashBag class="w-5 h-5 text-blue-lighten" />
-            <div class="text-primary-light">Rare Enchantment</div>
+        <div
+          class="cursor-pointer rounded-xl px-3 border-2 border-grey-light hover:border-white hover:border-opacity-100 border-opacity-50 bg-gradient-to-tr via-30% from-blue-light via-blue-dark to-blue-light"
+        >
+          <div class="py-3 flex justify-between">
+            <div class="flex items-center gap-2">
+              <TrashBag class="w-5 h-5 text-blue-lighten" />
+              <div class="text-primary-light">Rare Enchantment</div>
+            </div>
+
+            <div class="text-primary-light">
+              {{ materialItems.length * 3 }}%
+            </div>
           </div>
-
-          <div class="text-primary-light">9%</div>
         </div>
       </div>
 
       <div class="flex flex-col items-start absolute -bottom-3 right-8">
-        <KeyButton :text="true">
+        <KeyButton
+          @mousedown="onDiscard"
+          :text="true"
+          class="relative"
+          :anim-class="progressAnimation"
+          :progress="progress"
+        >
           <template #icon> X </template>
           <template #text>
             <div class="flex gap-1">
@@ -143,14 +164,6 @@
             </div>
           </template>
         </KeyButton>
-
-        <div class="w-40 h-10 bg-black opacity-50" id="progress-linear">
-          <div
-            class="flex bg-white h-full duration-300 ease-in-out"
-            :class="progressAnimation"
-            :style="`width: ${progress}%`"
-          ></div>
-        </div>
       </div>
     </div>
   </div>
@@ -195,23 +208,27 @@ const progress = ref(0);
 const progressAnimation = ref("");
 const canClearMaterial = ref(false);
 
+const onDiscard = () => {
+  if (progressAnimation.value == "" && materialItems.value.length > 0) {
+    progressAnimation.value = "animate-progress-animation";
+    canClearMaterial.value = true;
+
+    setTimeout(() => {
+      if (canClearMaterial.value) {
+        progressAnimation.value = "";
+        emit("on-empty");
+      }
+    }, 2000);
+    return;
+  }
+};
+
 onMounted(() => {
   window.addEventListener("keydown", (e) => {
     e.preventDefault();
     switch (e.key) {
       case "x":
-        if (progressAnimation.value == "" && materialItems.value.length > 0) {
-          progressAnimation.value = "animate-progress-animation";
-          canClearMaterial.value = true;
-
-          setTimeout(() => {
-            if (canClearMaterial.value) {
-              progressAnimation.value = "";
-              emit("on-empty");
-            }
-          }, 2000);
-          return;
-        }
+        onDiscard();
 
       default:
         break;

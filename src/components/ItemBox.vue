@@ -1,7 +1,9 @@
 <template>
   <div
-    class="w-16 h-16 p-2 relative hover:border-white hover:border-2 cursor-pointer"
-    :class="`${backgroundColor} ${inBackpack ? 'rounded-2xl' : 'rounded-lg'} ${
+    class="w-16 h-16 p-2 relative cursor-pointer"
+    :class="`${
+      type != 'inactive' ? 'hover:ring-white hover:ring-2' : ''
+    } ${backgroundColor} ${inBackpack ? 'rounded-2xl' : 'rounded-lg'} ${
       quantity ? 'rounded-br-lg' : ''
     }`"
   >
