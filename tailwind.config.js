@@ -29,12 +29,6 @@ export default {
           '0%': {
             width: '0%',
           },
-          // '40%': {
-          //   width: '50%',
-          // },
-          // '80%': {
-          //   width: '80%',
-          // },
           '100%': {
             width: '100%',
           },
@@ -43,6 +37,9 @@ export default {
       animation: {
         'progress-animation': 'progress-animation 2s ease-out',
       },
+      screens: {
+        '3xl': '2560px'
+      }
     },
   },
   plugins: [],

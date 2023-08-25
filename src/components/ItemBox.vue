@@ -15,6 +15,8 @@
     >
       <slot name="quantity" />
     </div>
+
+    <slot name="tooltip" />
   </div>
 </template>
 

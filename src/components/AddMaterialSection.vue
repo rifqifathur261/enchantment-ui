@@ -17,25 +17,31 @@
       </div>
     </div>
 
-    <div
-      class="flex flex-1 flex-row bg-black backdrop-blur-sm bg-opacity-30 relative z-20"
-    >
-      <div class="flex-1 flex justify-center items-center relative py-10">
+    <div class="flex flex-1 flex-row relative z-20">
+      <div
+        class="bg-black bg-opacity-30 backdrop-blur-sm w-full h-full absolute"
+      ></div>
+
+      <div class="flex-1 flex justify-center items-center relative">
         <div class="flex flex-col px-8 items-center">
           <div class="group">
             <ItemBox
               @click="selectedItem = {}"
               type="active"
               :img="selectedItem?.img"
-            />
-            <BubbleInfo class="absolute top-0 group-hover:scale-100">
-              <template #text>
-                <div class="flex gap-1">
-                  Select a <span class="text-text-dark"> Tool </span> then
-                  <span class="text-text-dark"> Material </span> to Enchant
-                </div>
+            >
+              <template #tooltip>
+                <BubbleInfo class="absolute -top-20 group-hover:scale-100">
+                  <template #text>
+                    <div class="flex flex-row flex-nowrap gap-1 w-max">
+                      Select a <span class="text-text-dark"> Tool </span> then
+                      <span class="text-text-dark"> Material </span>
+                      to Enchant
+                    </div>
+                  </template>
+                </BubbleInfo>
               </template>
-            </BubbleInfo>
+            </ItemBox>
           </div>
 
           <div class="text-center text-grey-light my-1">X</div>
@@ -90,7 +96,7 @@
       <div class="text-text-light text-[13px]">Enchantments</div>
 
       <div
-        class="cursor-pointer rounded-xl flex justify-between bg-black bg-opacity-25 px-3 py-3 border-2 border-grey-light border-opacity-50 hover:border-white hover:border-opacity-100"
+        class="rounded-xl flex justify-between bg-black bg-opacity-25 px-3 py-3 border-2 border-grey-light border-opacity-50"
       >
         <div class="flex items-center gap-2">
           <TrashBag class="w-5 h-5 text-grey-light" />
@@ -101,7 +107,7 @@
       </div>
 
       <div
-        class="cursor-pointer relative rounded-xl px-3 border-2 border-grey-light hover:border-white hover:border-opacity-100 border-opacity-50 bg-gradient-to-tr via-30% from-gold-light via-gold-dark to-gold-light"
+        class="relative rounded-xl px-3 border-2 border-grey-light border-opacity-50 bg-gradient-to-tr via-30% from-gold-light via-gold-dark to-gold-light"
       >
         <img
           class="absolute w-32 h-full object-cover right-1/4 z-0"
@@ -120,19 +126,20 @@
       </div>
 
       <div
-        class="cursor-pointer rounded-xl flex justify-center items-center gap-2 bg-black bg-opacity-25 px-3 py-3 border-2 border-grey-light border-opacity-50 hover:border-white hover:border-opacity-100"
+        class="rounded-xl flex justify-center items-center gap-2 bg-black bg-opacity-25 px-3 py-3 border-2 border-grey-light border-opacity-50"
       >
         <Rect class="w-4 h-4 text-grey-light" />
         <div class="text-text-light">Empty</div>
       </div>
 
-      <div class="flex gap-2 flex-col" v-if="materialItems.length > 0">
-        <div class="flex justify-center">
+      <div class="flex gap-2 flex-col min-h-[6rem]">
+        <div class="flex justify-center" v-if="materialItems.length > 0">
           <Triangle class="text-white w-4 h-4" />
         </div>
 
         <div
-          class="cursor-pointer rounded-xl px-3 border-2 border-grey-light hover:border-white hover:border-opacity-100 border-opacity-50 bg-gradient-to-tr via-30% from-blue-light via-blue-dark to-blue-light"
+          v-if="materialItems.length > 0"
+          class="rounded-xl px-3 border-2 border-grey-light border-opacity-50 bg-gradient-to-tr via-30% from-blue-light via-blue-dark to-blue-light"
         >
           <div class="py-3 flex justify-between">
             <div class="flex items-center gap-2">
@@ -150,6 +157,10 @@
       <div class="flex flex-col items-start absolute -bottom-3 right-8">
         <KeyButton
           @mousedown="onDiscard"
+          @mouseup="
+            progressAnimation = '';
+            canClearMaterial = false;
+          "
           :text="true"
           class="relative"
           :anim-class="progressAnimation"
@@ -225,7 +236,6 @@ const onDiscard = () => {
 
 onMounted(() => {
   window.addEventListener("keydown", (e) => {
-    e.preventDefault();
     switch (e.key) {
       case "x":
         onDiscard();
@@ -235,7 +245,6 @@ onMounted(() => {
     }
   });
   window.addEventListener("keyup", (e) => {
-    e.preventDefault();
     switch (e.key) {
       case "x":
         progressAnimation.value = "";

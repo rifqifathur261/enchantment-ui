@@ -1,6 +1,6 @@
 <template>
   <div
-    class="2xl:max-w-[60%] w-[80%] rounded-xl flex bg-white-primary bg-opacity-10 flex-col p-3 gap-3"
+    class="3xl:max-w-[40%] w-[80%] rounded-xl flex bg-white-primary bg-opacity-10 flex-col p-3 gap-3"
   >
     <div class="flex items-center">
       <Backpack class="w-5 h-5 text-primary" />
@@ -68,7 +68,6 @@ const handleSelect = (index) => {
     if (item.itemType == "tool") {
       enchantItem.value.item = item;
     } else if (item.itemType === "material") {
-      items[index].quantity = items[index].quantity - 1;
       if (enchantItem.value.materials.length < 5)
         enchantItem.value.materials.push(item);
     }

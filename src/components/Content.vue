@@ -1,15 +1,12 @@
 <template>
-  <div
-    class="bg-black bg-opacity-40 flex-1 pt-6 flex flex-col items-center gap-10"
-  >
+  <div class="flex-1 pt-6 flex flex-col items-center gap-10 relative">
     <AddMaterialSection
+      class="flex-1"
       :selected="selected"
       @on-empty="selected.materials = []"
     />
 
-    <BackpackSection @on-select="handleSelected" />
-
-    <BottomSection />
+    <BackpackSection class="flex-1" @on-select="handleSelected" />
   </div>
 </template>
 

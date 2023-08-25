@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col items-center w-auto scale-0 right-0 left-0 transition-all duration-150 origin-top"
+    class="flex flex-col items-center w-auto scale-0 right-0 left-0 transition-all duration-150"
   >
     <div class="bg-white-primary rounded-2xl px-4 py-3 text-text-light">
       <slot name="text" />
