@@ -25,7 +25,7 @@
             >
               <div
                 :class="`w-[7px] h-[7px] rotate-45 ${
-                  qty > items[item - 1]?.quantity
+                  qty > items[item - 1]?.enchantments.length
                     ? 'border border-black'
                     : 'bg-black'
                 }`"
@@ -84,6 +84,18 @@ const items = [
     hasQuantity: true,
     quantity: 0,
     state: "active",
+    enchantments: [
+      {
+        name: "Swift Swing",
+        rate: 3,
+        type: "Common",
+      },
+      {
+        name: "Extra Drop",
+        rate: 10,
+        type: "Epic",
+      },
+    ],
   },
   {
     name: "Axe",
@@ -92,6 +104,13 @@ const items = [
     hasQuantity: true,
     quantity: 1,
     state: "active",
+    enchantments: [
+      {
+        name: "Attack",
+        rate: 50,
+        type: "Epic",
+      },
+    ],
   },
   {
     name: "Hoe",
@@ -100,6 +119,7 @@ const items = [
     hasQuantity: true,
     quantity: 2,
     state: "active",
+    enchantments: [],
   },
   {
     name: "Fish",

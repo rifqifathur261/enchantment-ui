@@ -74,7 +74,12 @@
         <div
           class="flex flex-col items-start absolute -bottom-2 left-1/2 -translate-x-1/2"
         >
-          <KeyButton :text="true" light class="px-2 py-1">
+          <KeyButton
+            @click="handleConfirm"
+            :text="true"
+            light
+            class="px-2 py-1"
+          >
             <template #icon>
               <div class="px-1">Enter</div>
             </template>
@@ -95,46 +100,52 @@
     >
       <div class="text-text-light text-[13px]">Enchantments</div>
 
-      <div
-        class="rounded-xl flex justify-between bg-black bg-opacity-25 px-3 py-3 border-2 border-grey-light border-opacity-50"
-      >
-        <div class="flex items-center gap-2">
-          <TrashBag class="w-5 h-5 text-grey-light" />
-          <div class="text-primary-light">Swift Swing</div>
-        </div>
-
-        <div class="text-primary-light">3%</div>
-      </div>
-
-      <div
-        class="relative rounded-xl px-3 border-2 border-grey-light border-opacity-50 bg-gradient-to-tr via-30% from-gold-light via-gold-dark to-gold-light"
-      >
-        <img
-          class="absolute w-32 h-full object-cover right-1/4 z-0"
-          src="/texture.png"
-          alt=""
-        />
-
-        <div class="py-3 flex justify-between z-10">
+      <div class="flex flex-col gap-2">
+        <!-- <div
+          class="rounded-xl flex justify-between bg-black bg-opacity-25 px-3 py-3 border-2 border-grey-light border-opacity-50"
+        >
           <div class="flex items-center gap-2">
-            <Leaf class="w-5 h-5 text-accent -rotate-90" />
-            <div class="text-primary-light">Extra Drop</div>
+            <TrashBag class="w-5 h-5 text-grey-light" />
+            <div class="text-primary-light">Swift Swing</div>
           </div>
-
-          <div class="text-primary-light">15%</div>
+  
+          <div class="text-primary-light">3%</div>
         </div>
+  
+        <div
+          class="relative rounded-xl px-3 border-2 border-grey-light border-opacity-50 bg-gradient-to-tr via-30% from-gold-light via-gold-dark to-gold-light"
+        >
+          <img
+            class="absolute w-32 h-full object-cover right-1/4 z-0"
+            src="/texture.png"
+            alt=""
+          />
+  
+          <div class="py-3 flex justify-between z-10">
+            <div class="flex items-center gap-2">
+              <Leaf class="w-5 h-5 text-accent -rotate-90" />
+              <div class="text-primary-light">Extra Drop</div>
+            </div>
+  
+            <div class="text-primary-light">15%</div>
+          </div>
+        </div>
+   -->
+
+        <ItemEnchantment
+          v-for="index in 3"
+          :key="index.id"
+          :enchantment="
+            selectedItem?.enchantments
+              ? selectedItem?.enchantments[index - 1]
+              : {}
+          "
+        />
       </div>
 
-      <div
-        class="rounded-xl flex justify-center items-center gap-2 bg-black bg-opacity-25 px-3 py-3 border-2 border-grey-light border-opacity-50"
-      >
-        <Rect class="w-4 h-4 text-grey-light" />
-        <div class="text-text-light">Empty</div>
-      </div>
-
-      <div class="flex gap-2 flex-col min-h-[6rem]">
+      <div class="flex gap-2 flex-col min-h-[6rem] my-2">
         <div class="flex justify-center" v-if="materialItems.length > 0">
-          <Triangle class="text-white w-4 h-4" />
+          <Triangle class="text-white w-4 h-4 animate-bounce" />
         </div>
 
         <div
@@ -178,17 +189,24 @@
       </div>
     </div>
   </div>
+
+  <SuccessPopup
+    :selected-item="confirmTool"
+    v-if="modalDialog"
+    @on-close="modalDialog = false"
+  />
 </template>
 
 <script setup>
+import SuccessPopup from "./SuccessPopup.vue";
 import ItemBox from "./ItemBox.vue";
 import TrashBag from "../assets/icons/TrashBag.vue";
-import Leaf from "../assets/icons/Leaf.vue";
-import Rect from "../assets/icons/Rect.vue";
+
 import Triangle from "../assets/icons/Triangle.vue";
 import KeyButton from "./KeysButton.vue";
 import BubbleInfo from "./BubbleInfo.vue";
 import { onMounted, ref, watch } from "vue";
+import ItemEnchantment from "./ItemEnchantment.vue";
 
 const emit = defineEmits(["on-empty"]);
 
@@ -231,6 +249,16 @@ const onDiscard = () => {
       }
     }, 2000);
     return;
+  }
+};
+
+const modalDialog = ref(false);
+const confirmTool = ref({});
+
+const handleConfirm = () => {
+  if (selectedItem.value) {
+    modalDialog.value = true;
+    confirmTool.value = selectedItem.value;
   }
 };
 
