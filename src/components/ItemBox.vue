@@ -7,11 +7,16 @@
       quantity ? 'rounded-br-lg' : ''
     }`"
   >
-    <img :src="'/' + props.img" alt="" />
+    <img
+      :class="type == 'inactive' ? 'opacity-30' : ''"
+      :src="'/' + props.img"
+      alt=""
+    />
 
     <div
       v-if="props.quantity"
       class="bg-accent rounded-md absolute bottom-0 right-0"
+      :class="type == 'inactive' ? 'opacity-30' : ''"
     >
       <slot name="quantity" />
     </div>
@@ -54,7 +59,7 @@ const backgroundColor = computed(() => {
       return "bg-box-item";
 
     case "inactive":
-      return "bg-white-primary opacity-30";
+      return "bg-white-primary bg-opacity-30";
 
     default:
       return "bg-white-primary bg-opacity-20";

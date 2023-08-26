@@ -2,7 +2,7 @@
   <div
     class="3xl:max-w-[40%] w-[50%] rounded-xl flex bg-white-primary bg-opacity-10 flex-col p-3 gap-3"
   >
-    <div class="flex items-center">
+    <div class="flex items-center gap-2">
       <Backpack class="w-5 h-5 text-primary" />
       <div class="text-primary-light">Backpack</div>
     </div>
@@ -17,6 +17,7 @@
           :quantity="items[item - 1]?.hasQuantity"
           :type="items[item - 1]?.state"
           @click="handleSelect(item - 1)"
+          class="group"
         >
           <template #quantity>
             <div
@@ -36,6 +37,18 @@
             <div v-else class="text-[12px] px-[6px]">
               {{ items[item - 1]?.quantity }}
             </div>
+          </template>
+          <template #tooltip>
+            <BubbleInfo
+              class="absolute -top-20 group-hover:scale-100"
+              v-if="items[item - 1]?.name"
+            >
+              <template #text>
+                <div class="flex flex-row gap-1 w-max">
+                  <div>{{ items[item - 1]?.name }}</div>
+                </div>
+              </template>
+            </BubbleInfo>
           </template>
         </ItemBox>
       </div>
@@ -57,6 +70,7 @@
 import { ref } from "vue";
 import Backpack from "../assets/icons/Backpack.vue";
 import ItemBox from "./ItemBox.vue";
+import BubbleInfo from "./BubbleInfo.vue";
 
 const emit = defineEmits(["on-select"]);
 

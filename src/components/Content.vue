@@ -16,7 +16,6 @@
 import { ref } from "vue";
 import AddMaterialSection from "./AddMaterialSection.vue";
 import BackpackSection from "./BackpackSection.vue";
-import BottomSection from "./BottomSection.vue";
 
 const selected = ref({});
 
