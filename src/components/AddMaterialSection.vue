@@ -265,6 +265,9 @@ const handleConfirm = () => {
 onMounted(() => {
   window.addEventListener("keydown", (e) => {
     switch (e.key) {
+      case "Enter":
+        handleConfirm();
+        break;
       case "x":
         onDiscard();
 

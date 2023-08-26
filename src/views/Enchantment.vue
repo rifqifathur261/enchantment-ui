@@ -24,7 +24,7 @@
         <Enchantment class="w-5 h-5 text-primary" />
       </div>
 
-      <div class="text-text-dark">Open Enchantment</div>
+      <div class="text-text-dark">Open Enchantments</div>
     </div>
   </div>
 </template>
@@ -36,7 +36,7 @@ import BottomSection from "../components/BottomSection.vue";
 import Enchantment from "../assets/icons/Anvil.vue";
 import { ref } from "vue";
 
-const isEnchantOpen = ref(false);
+const isEnchantOpen = ref(true);
 
 window.addEventListener("keydown", (e) => {
   switch (e.key) {
