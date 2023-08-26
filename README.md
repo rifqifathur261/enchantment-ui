@@ -25,7 +25,7 @@ Interactive Enchantment UI built with Vue 3, Vite, and Tailwind css.
 
 - Wide 16:9 - 1680 x 901 Pixels (Macbook Air M1)
 - Wide 16:9 - 1920 x 1080 Pixels
-- Ultra Wide 21:9 - 1680 x 901 Pixels
+- Ultra Wide 21:9 - 2560 x 1080 Pixels
   
 ## Attribution
 
