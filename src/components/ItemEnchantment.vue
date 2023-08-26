@@ -23,12 +23,6 @@
     v-if="enchantment?.type == 'Epic'"
     class="relative rounded-xl px-3 border-2 border-grey-light border-opacity-50 bg-gradient-to-tr via-30% from-gold-light via-gold-dark to-gold-light"
   >
-    <img
-      class="absolute w-32 h-full object-cover right-1/4 z-0"
-      src="/texture.png"
-      alt=""
-    />
-
     <div class="py-3 flex justify-between z-10">
       <div class="flex items-center gap-2">
         <Leaf class="w-5 h-5 text-accent -rotate-90" />
