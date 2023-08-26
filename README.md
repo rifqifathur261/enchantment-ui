@@ -1,6 +1,18 @@
-# Inventory UI using Vue 3 + Vite
+# Enchantment UI
 
-Interactive Inventory UI built with Vue 3, Vite, and Tailwind css.
+Interactive Enchantment UI built with Vue 3, Vite, and Tailwind css.
+
+## Features
+
+- Adding Tool to Enchant
+- Adding Material to Enchant
+- Keyboard and Mouse Input
+- Enchantment Buff/Effects
+- Rare Enchantment Buff/Effects Percentage
+- Enchantment Indicator Percentage
+- Discard Tool
+- Single/Multiple Discard Material
+- Open/Close enchantment menu
 
 ## Tech Stack
 
