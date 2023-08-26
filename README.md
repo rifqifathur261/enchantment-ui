@@ -4,4 +4,6 @@ Interactive Inventory UI built with Vue 3, Vite, and Tailwind css.
 
 ## Attribution
 
-- <a href="https://www.flaticon.com/free-icons/anvil" title="anvil icons">Anvil icons created by Freepik - Flaticon</a>
+### Icon
+
+- <a href="https://www.flaticon.com" title="Flat Icons">Icons created by Freepik - Flaticon</a>
