@@ -12,6 +12,7 @@ Interactive Enchantment UI built with Vue 3, Vite, and Tailwind css.
 - Enchantment Indicator Percentage
 - Discard Tool
 - Single/Multiple Discard Material
+- Hold Button Event
 - Open/Close enchantment menu
 
 ## Tech Stack
