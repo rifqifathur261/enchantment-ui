@@ -20,7 +20,13 @@ Interactive Enchantment UI built with Vue 3, Vite, and Tailwind css.
 - Vue 3
 - Vite
 - Tailwind CSS
+  
+## Tested Screen
 
+- Wide 16:9 - 1680 x 901 Pixels (Macbook Air M1)
+- Wide 16:9 - 1920 x 1080 Pixels
+- Ultra Wide 21:9 - 1680 x 901 Pixels
+  
 ## Attribution
 
 ### Illustration
